@@ -1,7 +1,8 @@
 import sqlite3 
+from config import DB_NAME
 
 def create_stocks_table():
-    with sqlite3.connect("earnings_tracker.db") as conn:
+    with sqlite3.connect(DB_NAME) as conn:
         conn.execute("PRAGMA foreign_keys = ON")
         cursor = conn.cursor()
         cursor.execute("""
@@ -14,7 +15,7 @@ def create_stocks_table():
         conn.commit()
 
 def create_earnings_events_table():
-    with sqlite3.connect("earnings_tracker.db") as conn:
+    with sqlite3.connect(DB_NAME) as conn:
         conn.execute("PRAGMA foreign_keys = ON")
         cursor = conn.cursor()
         cursor.execute("""
@@ -30,7 +31,7 @@ def create_earnings_events_table():
         conn.commit()
 
 def create_price_snapshots_table():
-    with sqlite3.connect("earnings_tracker.db") as conn:
+    with sqlite3.connect(DB_NAME) as conn:
         conn.execute("PRAGMA foreign_keys = ON")
         cursor = conn.cursor()
         cursor.execute("""
@@ -45,3 +46,9 @@ def create_price_snapshots_table():
             )
         """)
         conn.commit()
+
+def create_tables():
+    create_stocks_table()
+    create_earnings_events_table()
+    create_price_snapshots_table()
+    
