@@ -2,6 +2,10 @@ import logging
 import logging.handlers
 from pathlib import Path
 
+logging.basicConfig(
+    level=logging.DEBUG,
+    format="%(asctime)s %(name)s %(levelname)s %(message)s"
+)
 
 def setup_logging():
     log_dir = Path("logs")

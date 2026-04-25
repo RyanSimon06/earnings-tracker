@@ -2,8 +2,6 @@ import sqlite3
 import logging
 from config import DB_NAME
 from config import STOCKS
-from fetcher import fetch_price_history
-from fetcher import fetch_earnings_dates
 
 logger = logging.getLogger(__name__)
 
@@ -92,7 +90,7 @@ def insert_earnings_event(earnings_event):
         with get_connection() as conn:
             cursor = conn.cursor()
             cursor.execute("""
-                INSERT OR INTO earnings_events (ticker, earnings_date, actual_eps)
+                INSERT OR IGNORE INTO earnings_events (ticker, earnings_date, actual_eps)
                 VALUES (?, ?, ?)
             """, earnings_event)
             conn.commit()
